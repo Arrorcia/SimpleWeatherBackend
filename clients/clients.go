@@ -7,7 +7,8 @@ type HeClient interface {
 }
 
 type GlClient interface {
-	GetProvinces() ([]*common.Province, error)
-	GetCities(provinceCode int64) ([]*common.City, error)
-	GetCounties(provinceCode int64, cityCode int64) ([]*common.County, error)
+	ListProvinces() ([]*common.Province, error)
+	ListCities(provinceCode int64) ([]*common.City, error)
+	ListCounties(provinceCode int64, cityCode int64) ([]*common.County, error)
+	QueryWeather(locationCode int64) (*common.SwWeather3D, error)
 }

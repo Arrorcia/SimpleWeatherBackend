@@ -11,6 +11,6 @@ func main() {
 	gv1.GET("/china", handler_v1.ListProvincesHandler)
 	gv1.GET("/china/:provinceCode", handler_v1.ListCitiesHandler)
 	gv1.GET("/china/:provinceCode/:cityCode", handler_v1.ListCountiesHandler)
-
+	gv1.GET("/weather", handler_v1.QueryWeatherHandler)
 	_ = r.Run(":12345")
 }

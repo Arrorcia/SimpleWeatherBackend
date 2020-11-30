@@ -7,17 +7,17 @@ import (
 	"strconv"
 )
 
-func ListCitiesHandler(ctx *gin.Context) {
+func QueryWeatherHandler(ctx *gin.Context) {
 	glClient := clients.NewGlClientImpl()
-	pC, err := strconv.Atoi(ctx.Param("provinceCode"))
+	lC, err := strconv.Atoi(ctx.Query("location"))
 	if err != nil {
 		ctx.String(http.StatusBadRequest, err.Error())
 		return
 	}
-	cities, err := glClient.ListCities(int64(pC))
+	swWeather3D, err := glClient.QueryWeather(int64(lC))
 	if err != nil {
 		ctx.String(http.StatusInternalServerError, err.Error())
 		return
 	}
-	ctx.JSON(http.StatusOK, cities)
+	ctx.JSON(http.StatusOK, swWeather3D)
 }

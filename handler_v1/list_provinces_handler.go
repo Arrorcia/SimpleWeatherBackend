@@ -8,7 +8,7 @@ import (
 
 func ListProvincesHandler(ctx *gin.Context) {
 	glClient := clients.NewGlClientImpl()
-	provinces, err := glClient.GetProvinces()
+	provinces, err := glClient.ListProvinces()
 	if err != nil {
 		ctx.String(http.StatusInternalServerError, err.Error())
 		return

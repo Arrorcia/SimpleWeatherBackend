@@ -19,7 +19,7 @@ func ListCountiesHandler(ctx *gin.Context) {
 		ctx.String(http.StatusBadRequest, err.Error())
 		return
 	}
-	counties, err := glClient.GetCounties(int64(pC), int64(cC))
+	counties, err := glClient.ListCounties(int64(pC), int64(cC))
 	if err != nil {
 		ctx.String(http.StatusInternalServerError, err.Error())
 		return
