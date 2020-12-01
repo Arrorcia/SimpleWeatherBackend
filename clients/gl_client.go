@@ -86,7 +86,7 @@ func (g *GlClientImpl) ListCounties(provinceCode int64, cityCode int64) ([]*comm
 	return counties, nil
 }
 
-func (g *GlClientImpl) QueryWeather(locationCode int64) (*common.SwWeather3D, error) {
+func (g *GlClientImpl) QueryWeather(locationCode int64) (*common.GlWeather7D, error) {
 	resp, err := http.Get(WeatherPrefix + fmt.Sprintf("?cityid=CN%d&key=%s", locationCode, g.key))
 	if err != nil {
 		return nil, err
@@ -99,10 +99,10 @@ func (g *GlClientImpl) QueryWeather(locationCode int64) (*common.SwWeather3D, er
 	if err != nil {
 		return nil, err
 	}
-	var swWeather3D common.SwWeather3D
-	err = json.Unmarshal(buf.Bytes(), &swWeather3D)
+	var glWeather7D common.GlWeather7D
+	err = json.Unmarshal(buf.Bytes(), &glWeather7D)
 	if err != nil {
 		return nil, err
 	}
-	return &swWeather3D, nil
+	return &glWeather7D, nil
 }

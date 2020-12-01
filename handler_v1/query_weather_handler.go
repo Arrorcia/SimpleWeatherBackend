@@ -14,10 +14,10 @@ func QueryWeatherHandler(ctx *gin.Context) {
 		ctx.String(http.StatusBadRequest, err.Error())
 		return
 	}
-	swWeather3D, err := glClient.QueryWeather(int64(lC))
+	glWeather7D, err := glClient.QueryWeather(int64(lC))
 	if err != nil {
 		ctx.String(http.StatusInternalServerError, err.Error())
 		return
 	}
-	ctx.JSON(http.StatusOK, swWeather3D)
+	ctx.JSON(http.StatusOK, glWeather7D)
 }
