@@ -1,6 +1,9 @@
 package common
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // He2Sw returns a SwWeather3D built from HeWeather3D
 func He2Sw(h *HeWeather3D) (*SwWeather3D, error) {
@@ -99,7 +102,7 @@ func Gl2Sw(g *GlWeather7D) (*SwWeather3D, error) {
 	swd := sw.Weather[0]
 	swd.Basic = &SwBasicInfo{
 		City: glw.Basic.City,
-		ID:   glw.Basic.ID,
+		ID:   strings.TrimPrefix(glw.Basic.ID, "CN"),
 		Update: &SwUpdatePoint{
 			Loc: glw.Basic.Update.Loc,
 		},
