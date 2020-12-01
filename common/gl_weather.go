@@ -8,7 +8,7 @@ type GlWeatherData struct {
 	Status        string         `json:"status"`
 	Msg           string         `json:"msg"`
 	Basic         *GlBasicInfo   `json:"basic"`
-	Detail        *GlAQIInfo     `json:"aqi"`
+	AQI           *GlAQIInfo     `json:"aqi"`
 	Now           *GlNow         `json:"now"`
 	Suggestions   *GlSuggestions `json:"suggestion"`
 	DailyForecast []*GlForecast  `json:"daily_forecast"`
