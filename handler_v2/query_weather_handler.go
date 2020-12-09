@@ -25,5 +25,7 @@ func QueryWeatherHandler(ctx *gin.Context) {
 		ctx.String(http.StatusInternalServerError, err.Error())
 		return
 	}
+	swWeather3D.Weather[0].Basic.ID = ctx.Query("location")
+	swWeather3D.Weather[0].Basic.City = "=city="
 	ctx.JSON(http.StatusOK, swWeather3D)
 }
