@@ -2,6 +2,7 @@ package common
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -53,7 +54,12 @@ func He2Sw(h *HeWeather3D) (*SwWeather3D, error) {
 	}
 	swd.Now = &SwNow{
 		// TODO:
-		Temperature: "-1",
+		Temperature: func() string {
+			max, _ := strconv.Atoi(cdd.TempMax)
+			min, _ := strconv.Atoi(cdd.TempMin)
+			mid := (max + min) / 2
+			return strconv.Itoa(mid)
+		}(),
 		Condition: &SwCondition{
 			Txt: cdd.TextDay,
 		},
