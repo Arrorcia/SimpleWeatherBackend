@@ -31,14 +31,10 @@ func He2Sw(h *HeWeather3D) (*SwWeather3D, error) {
 	swd.Status = "Ok"
 	swd.Msg = ""
 	swd.Basic = &SwBasicInfo{
-		// TODO: fill city and id field
 		City: "",
 		ID:   "",
 		Update: &SwUpdatePoint{
-			// TODO: convert time format
-			// current: 2020-11-28T19:35+08:00
-			// target: 2020-11-28 19:35
-			Loc: h.UpdateTime,
+			Loc: "",
 		},
 	}
 	cdd := h.Daily[0]
@@ -66,10 +62,10 @@ func He2Sw(h *HeWeather3D) (*SwWeather3D, error) {
 	}
 	swd.Suggestions = &SwSuggestions{
 		Comfort: &SwSuggestionValue{
-			Txt: "comfort",
+			Txt: "无建议",
 		},
 		Sport: &SwSuggestionValue{
-			Txt: "sport",
+			Txt: "无建议",
 		},
 	}
 	swd.DailyForecast = make([]*SwForecast, 2)
@@ -146,4 +142,20 @@ func Gl2Sw(g *GlWeather7D) (*SwWeather3D, error) {
 		}
 	}
 	return sw, nil
+}
+
+func GetSuggestions(tmp int) (string, string, error) {
+	var comfSug, sportSug string
+	switch {
+	case tmp < 10:
+		comfSug += "气温较低，注意保暖，不宜外出。"
+		sportSug += "气温过低，不宜进行户外运动。"
+	case tmp > 30:
+		comfSug += "气温较高，注意散热，不宜外出。"
+		sportSug += "气温过高，不宜进行户外运动。"
+	default:
+		comfSug += "气温适中，天气较好，适合外出。"
+		sportSug += "气温适宜，建议外出活动。"
+	}
+	return comfSug, sportSug, nil
 }
